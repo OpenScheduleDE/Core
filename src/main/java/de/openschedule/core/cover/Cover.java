@@ -1,4 +1,4 @@
-package de.openschedule.core.database;
+package de.openschedule.core.cover;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

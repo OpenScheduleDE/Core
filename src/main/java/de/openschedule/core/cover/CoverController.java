@@ -1,6 +1,5 @@
-package de.openschedule.core.frontend;
+package de.openschedule.core.cover;
 
-import de.openschedule.core.rest.CoverRestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,11 +11,11 @@ import java.time.LocalDate;
 @Controller
 public class CoverController {
 
-    private final CoverRestController coverRest;
+    private final CoverService service;
 
     @Autowired
-    public CoverController(CoverRestController coverRest) {
-        this.coverRest = coverRest;
+    public CoverController(CoverService service) {
+        this.service = service;
     }
 
     @RequestMapping({"/", "/today", "/heute"})
@@ -34,7 +33,7 @@ public class CoverController {
         ModelAndView model = new ModelAndView("list");
 
         model.addObject("day", date);
-        model.addObject("covers", this.coverRest.listCoversByDate(date));
+        model.addObject("covers", service.getCoversByDate(date));
 
         return model;
     }

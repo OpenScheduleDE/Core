@@ -1,9 +1,6 @@
-package de.openschedule.core.rest;
+package de.openschedule.core.cover;
 
-import de.openschedule.core.database.Cover;
-import de.openschedule.core.database.CoverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -13,31 +10,30 @@ import java.util.List;
 @RequestMapping("/api/cover")
 public class CoverRestController {
 
-    private final CoverRepository coverRepository;
-    private final Sort sorting = new Sort(Sort.Direction.ASC, "day", "grades", "hours");
+    private final CoverService service;
 
     @Autowired
-    public CoverRestController(final CoverRepository coverRepository) {
-        this.coverRepository = coverRepository;
+    public CoverRestController(final CoverService service) {
+        this.service = service;
     }
 
     @RequestMapping("/today")
     public List<Cover> listTodayCovers() {
-        return this.listCoversByDate(LocalDate.now());
+        return service.getCoversByDate(LocalDate.now());
     }
 
     @RequestMapping("/tomorrow")
     public List<Cover> listTomorrowCovers() {
-        return this.listCoversByDate(LocalDate.now().plusDays(1));
+        return service.getCoversByDate(LocalDate.now().plusDays(1));
     }
 
     @RequestMapping("/{date}")
     public List<Cover> listCoversByDate(@PathVariable LocalDate date) {
-        return coverRepository.findByDay(sorting, date);
+        return service.getCoversByDate(date);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Cover addCover(@RequestBody Cover cover) {
-        return coverRepository.save(cover);
+        return service.saveNewCover(cover);
     }
 }

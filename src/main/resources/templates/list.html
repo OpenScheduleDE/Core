@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>OpenScheduleDE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title th:text="'Vertretung am '  + ${{day}}">OpenScheduleDE</title>
 
     <link
             rel="stylesheet"
@@ -12,6 +13,40 @@
     />
 </head>
 <body>
+<div class="bg-dark pt-5 pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Musterschule</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Elité Gymnasium</h6>
+                        <p class="card-text">
+                            Musterschule<br />
+                            Peter-Witz-Straße 35<br />
+                            D-12345 Hamburg
+                        </p>
+                        <a href="#" class="card-link">Zur Webseite</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">OpenScheduleDE</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Die Vertretungsplan Software</h6>
+                        <p class="card-text">
+                            OpenScheduleDE<br />
+                            Hans-Müller Weg 853<br />
+                            D-67890 Berlin
+                        </p>
+                        <a href="#" class="card-link">Zur Webseite</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div th:if="${#lists.isEmpty(covers)}" class="alert alert-primary" role="alert">
     Keine Vertretung für den <span th:text="${{day}}"></span> gefunden.
 </div>

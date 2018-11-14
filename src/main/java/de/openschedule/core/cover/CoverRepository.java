@@ -1,4 +1,4 @@
-package de.openschedule.core.database;
+package de.openschedule.core.cover;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.MongoRepository;
