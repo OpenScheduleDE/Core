@@ -4,10 +4,7 @@ import de.openschedule.core.database.Cover;
 import de.openschedule.core.database.CoverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,12 +23,17 @@ public class CoverRestController {
 
     @RequestMapping("/today")
     public List<Cover> listTodayCovers() {
-        return coverRepository.findByDay(sorting, LocalDate.now());
+        return this.listCoversByDate(LocalDate.now());
     }
 
     @RequestMapping("/tomorrow")
     public List<Cover> listTomorrowCovers() {
-        return coverRepository.findByDay(sorting, LocalDate.now().plusDays(1));
+        return this.listCoversByDate(LocalDate.now().plusDays(1));
+    }
+
+    @RequestMapping("/{date}")
+    public List<Cover> listCoversByDate(@PathVariable LocalDate date) {
+        return coverRepository.findByDay(sorting, date);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>OpenScheduleDE</title>
+
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous"
+    />
+</head>
+<body>
+<div th:if="${#lists.isEmpty(covers)}" class="alert alert-primary" role="alert">
+    Keine Vertretung für den <span th:text="${{day}}"></span> gefunden.
+</div>
+<div th:unless="${#lists.isEmpty(covers)}" class="table-responsive">
+    <table class="table table-striped table-hover">
+        <caption th:text="${{day}}"></caption>
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Stunde</th>
+            <th scope="col">Klassen</th>
+            <th scope="col">Fach</th>
+            <th scope="col">Lehrer</th>
+            <th scope="col">Raum</th>
+            <th scope="col">Vertretungslehrer</th>
+            <th scope="col">Vertretungsfach</th>
+            <th scope="col">Neuer Raum</th>
+            <th scope="col">Grund</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cover : ${covers}">
+            <td th:text="${cover.hours}">-</td>
+            <td th:text="${cover.grades}">-</td>
+            <td th:text="${cover.subject}">-</td>
+            <td th:text="${cover.teacher}">-</td>
+            <td th:text="${cover.room}">-</td>
+            <td th:text="${cover.coverTeacher}"></td>
+            <td th:text="${cover.coverSubject}"></td>
+            <td th:text="${cover.coverRoom}"></td>
+            <td th:text="${cover.reason}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
