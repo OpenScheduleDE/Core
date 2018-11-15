@@ -23,8 +23,18 @@ public class ConfigRestController {
         return service.getAllEntries();
     }
 
+    @RequestMapping("/add")
+    public ConfigEntry addEntry() {
+        return service.setEntry(ConfigKey.SCHOOL_WEBSITE, "https://www.example.org/");
+    }
+
+    @RequestMapping("/address")
+    public ConfigEntry getAddress() {
+        return service.getEntry(ConfigKey.SCHOOL_ADDRESS);
+    }
+
     @RequestMapping("/{key}")
-    public ConfigEntry getConfigEntryByKey(@PathVariable String key) {
+    public ConfigEntry getConfigEntryByKey(@PathVariable ConfigKey key) {
         return service.getEntry(key);
     }
 }
